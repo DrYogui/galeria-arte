@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Arte</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--sky-blue); /* Color celeste */
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: var(--prussian-blue); /* Azul prusiano */
+            color: var(--selective-yellow); /* Amarillo selectivo */
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: var(--selective-yellow); /* Amarillo selectivo */
+            text-decoration: none;
+        }
+
+        section {
+            padding: 20px;
+            display: none; /* Ocultar todas las secciones por defecto */
+            background-color: #fff; /* Color blanco */
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+        }
+
+        .image {
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .image p {
+            margin: 10px 0 0;
+        }
+
+        footer {
+            background-color: var(--prussian-blue); /* Azul prusiano */
+            color: var(--selective-yellow); /* Amarillo selectivo */
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+
+    <!-- Definir la paleta de colores -->
+    <style>
+        :root {
+            /* Definir colores según la paleta proporcionada */
+            --sky-blue: #8ecae6ff;
+            --blue-green: #219ebcff;
+            --prussian-blue: #023047ff;
+            --selective-yellow: #ffb703ff;
+            --ut-orange: #fb8500ff;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+    <h1>Bienvenido a nuestra Galería de Arte</h1>
+    <nav>
+        <ul>
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#galeria">Galería</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+    </nav>
+</header>
+
+<section id="inicio">
+    <h2>¡Explora el mundo del arte!</h2>
+    <p>Bienvenido a nuestra galería, donde encontrarás una amplia selección de obras de arte de artistas locales e internacionales.</p>
+</section>
+
+<section id="galeria">
+    <h2>Nuestra Galería</h2>
+    <div class="gallery">
+        <div class="image">
+            <img src="foto1.png" alt="Obra de arte 1">
+            <p>Estilo futuroso, tecnología vibrante</p>
+        </div>
+        <div class="image">
+            <img src="foto2.jpg" alt="Obra de arte 2">
+            <p>Realidad virtual, jugador inmerso</p>
+        </div>
+        <!-- Agregar más imágenes y descripciones según sea necesario -->
+    </div>
+</section>
+
+<section id="contacto">
+    <h2>Contacto</h2>
+    <form action="enviar.php" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" required></textarea>
+        <button type="submit">Enviar</button>
+    </form>
+</section>
+
+<footer>
+    <p>&copy; 2024 Galería de Arte. Todos los derechos reservados.</p>
+</footer>
+
+<script>
+    // Obtener todas las secciones y enlaces de navegación
+    const sections = document.querySelectorAll('section');
+    const links = document.querySelectorAll('nav a');
+
+    // Función para mostrar la sección correspondiente y ocultar las demás
+    function mostrarSeccion(targetId) {
+        sections.forEach(section => {
+            if (section.id === targetId) {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        });
+    }
+
+    // Asignar evento de clic a cada enlace de navegación
+    links.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            const targetId = this.getAttribute('href').substring(1);
+            mostrarSeccion(targetId);
+        });
+    });
+
+    // Mostrar la sección inicial basada en el hash en la URL
+    if (window.location.hash) {
+        const targetId = window.location.hash.substring(1);
+        mostrarSeccion(targetId);
+    } else {
+        // Mostrar la primera sección si no hay ningún hash en la URL
+        mostrarSeccion(sections[0].id);
+    }
+</script>
+</body>
+
+</html>
